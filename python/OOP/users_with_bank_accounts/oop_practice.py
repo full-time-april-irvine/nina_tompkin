@@ -1,7 +1,4 @@
-class BankAccount:
-        def __init__(self,int_rate,balance):
-            self.int_rate = 0.006
-            self.balance = 0
+from bankaccount import BankAccount
 
 class User:		# declare a class and give it name User
     def __init__(self,username,email_address):
@@ -30,31 +27,6 @@ class User:		# declare a class and give it name User
         other_user.account += amount
         print(f"{self.name} has successfully transferred ${amount} to {other_user.name}")
         return self
-
-    def deposit(self,amount):
-        self.balance += amount
-        return self
-
-    def withdraw(self,amount):
-        if self.balance - amount > 0:
-            self.balance -= amount
-        else:
-            print("Insufficient funds: Charging a $5 fee.")
-            self.balance -= 5
-        return self
-
-    def display_account_info(self):
-        if self.balance >= 0:
-            print(f"Balance: ${round(self.balance,2)}")
-        else:
-            print(f"Balance: -${round(self.balance*-1,2)}")
-        return self
-
-    def yield_interest(self):
-        if self.balance >= 0:
-            self.balance *= (1+self.int_rate)
-        return self
-
 
 #nina = User("Nina Gervaise Tompkin","nina.tompkin@gmail.com")
 #guido = User("Guido Von Trapperson","italian_stallion@gmail.com")
