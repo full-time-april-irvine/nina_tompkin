@@ -17,6 +17,7 @@
 }
 
 .box{
+    background-color:{{ color }};
     border: 3px solid darkslategrey;
     width:200px;
     height:200px;
@@ -29,12 +30,8 @@
     <div class="container">
         <h1>Welcome!</h1>
         {% for x in range(0,times): %}
-            <div class="box" style="background-color:lightcoral;"></div>
-        {% endfor %}
-        {% for x in range(0,times): %}
-            <p></p>
+            <div class="box"></div>
         {% endfor %}
     </div>
-
 </body>
 </html>
