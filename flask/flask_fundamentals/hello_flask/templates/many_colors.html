@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Playground</title>
+</head>
+<style>
+
+.container{
+    width:100%;
+    text-align: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:1em;
+    color:darkslategrey;
+}
+
+.box{
+    border: 3px solid darkslategrey;
+    width:200px;
+    height:200px;
+    margin:10px;
+    display:inline-block;
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>Welcome!</h1>
+        {% for x in range(0,times): %}
+            <div class="box" style="background-color:lightcoral;"></div>
+        {% endfor %}
+        {% for x in range(0,times): %}
+            <p></p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
