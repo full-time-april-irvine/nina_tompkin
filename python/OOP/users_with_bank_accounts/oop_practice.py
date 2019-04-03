@@ -7,11 +7,11 @@ class User:		# declare a class and give it name User
         self.account = BankAccount(int_rate=0.02, balance=0)
 
     def make_deposit(self, amount):
-        self.account.deposit()
+        self.account.deposit(amount)
         return self
 
     def make_withdrawl(self,amount):
-        self.account.withdraw()
+        self.account.withdraw(amount)
         return self
 
     def display_user_balance(self):
@@ -23,8 +23,8 @@ class User:		# declare a class and give it name User
             return self
 
     def transfer_money(self,other_user,amount):
-        self.account.withdraw()
-        other_user.account.deposit()
+        self.account.withdraw(amount)
+        other_user.account.deposit(amount)
         print(f"{self.name} has successfully transferred ${amount} to {other_user.name}")
         return self
 
