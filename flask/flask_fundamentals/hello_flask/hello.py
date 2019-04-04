@@ -4,6 +4,16 @@ app = Flask(__name__)    # Create a new instance of the Flask class called "app"
 def index():
     return render_template('index.html', phrase="hello", times=5)
 
+@app.route('/lists')
+def render_lists():
+    student_info = [
+        {'name': 'Michael','age':35},
+        {'name': 'John','age':30},
+        {'name': 'Mark','age':25},
+        {'name': 'KB','age':27}
+    ]
+    return render_template("lists.html",random_numbers = [3,1,5], students = student_info)
+
 @app.route('/play')
 def playground():
     return render_template('playground.html')
@@ -15,9 +25,6 @@ def playground_with_num(num):
 @app.route('/play/<num>/<color>')
 def playground_with_colors(num,color):
     return render_template('many_colors.html',times=int(num),color=color)
-
-if __name__=="__main__":   # Ensure this file is being run directly and not from a different module    
-    app.run(debug=True)    # Run the app in debug mode.
 
 @app.route("/<name>")
 def hello_nina(name):
@@ -36,4 +43,5 @@ def show_user_profile(username,id):
 def hello_world():
     return 'Hello World!'  # Return the string 'Hello World!' as a response
 
-
+if __name__=="__main__":   # Ensure this file is being run directly and not from a different module    
+    app.run(debug=True)    # Run the app in debug mode.

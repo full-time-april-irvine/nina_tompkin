@@ -1,0 +1,12 @@
+.container{
+    width:50%;
+}
+
+h1,p{    
+    color: navy;
+    text-align: center;
+}
+
+.table{
+    border: 1px solid lightgray;
+}
