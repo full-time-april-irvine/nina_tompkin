@@ -9,18 +9,21 @@
 </head>
 <body>
     <table>
-        {% for i in range(4): %}
+        {% for i in range(rows): %}
         <tr>
-            {% for j in range(4): %}
+            {% for j in range(cols): %}
             <td class="light"></td>
+            {% endfor %}
+            {% for j in range(cols): %}
             <td class="dark"></td>
             {% endfor %}
         </tr>
-            
         <tr>
-            {% for j in range(4): %}
-            <td class="dark"></td>
-            <td class="light"></td>
+            {% for j in range(cols): %}
+            <td class="dark2"></td>
+            {% endfor %}
+            {% for j in range(cols): %}
+            <td class="light2"></td>
             {% endfor %}
         </tr>
     {% endfor %}
