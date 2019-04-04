@@ -1,0 +1,16 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+.light{
+    background-color:cadetblue;
+    width:50px;
+    height:50px;
+}
+
+.dark{
+    background-color:green;
+    width:50px;
+    height:50px;
+}

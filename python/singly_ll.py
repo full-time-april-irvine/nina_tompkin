@@ -28,9 +28,22 @@ class SList:
         runner.next = new_node  # increment the runner to the next node in the list
         return self # return self to allow for chaining
     
+    def remove_from_front(self):
+        next_node = self.head.next
+        self.head = next_node
+        return self
+
+    def remove_from_back(self):
+        runner = self.head
+        while(runner.next.next != None):
+            runner = runner.next
+        runner.next = None
+        return self
+    
 
 my_list = SList()	# create a new instance of a list
-my_list.add_to_front("are").add_to_front("Linked lists").add_to_back("fun!").print_values()   # chaining, yeah!
+my_list.add_to_front("are").add_to_front("Linked lists").add_to_back("fun!").add_to_back("Fuck").add_to_back("yeah").add_to_back("Algos!").print_values().remove_val(1)   # chaining, yeah!
+
 # output should be:
 # Linked lists
 # are
