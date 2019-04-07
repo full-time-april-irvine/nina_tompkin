@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ninja Gold</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static',filename='css/styles.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/script.js') }}"></script>
+</head>
+<body>
+    <div class="container pt-4">
+        <div class="form-group row ml-1">
+            <label for="comment">Your Gold:</label>
+            <div class="col-sm-10">
+                <p class="border border-secondary" style="width:200px">{{your_gold}}</p>
+            </div>
+        </div>
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body border border-secondary">
+                    <h2 class="card-title pricing-card-title">Farm</h2>
+                    <small class="text-muted">(earns 10-20 golds)</small>
+                    <form class="pt-3" action="/process_money" method="post">
+                        <input class="btn btn-primary shadow" type="submit" value="Find Gold!">
+                    </form>
+                </div>
+            </div>
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body border border-secondary">
+                    <h2 class="card-title pricing-card-title">Cave</h2>
+                    <small class="text-muted">(earns 5-10 golds)</small>
+                    <form class="pt-3" action="/process_money" method="post">
+                        <input class="btn btn-primary shadow" type="submit" value="Find Gold!">
+                    </form>                
+                </div>
+            </div>
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body border border-secondary">
+                    <h2 class="card-title pricing-card-title">House</h2>
+                    <small class="text-muted">(earns 2-5 golds)</small>
+                    <form class="pt-3" action="/process_money" method="post">
+                        <input class="btn btn-primary shadow" type="submit" value="Find Gold!">
+                    </form>                
+                </div>
+            </div>
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body border border-secondary">
+                    <h2 class="card-title pricing-card-title">Casino</h2>
+                    <small class="text-muted">(earns 0-50 golds)</small>
+                    <form class="pt-3" action="/process_money" method="post">
+                        <input class="btn btn-primary shadow" type="submit" value="Find Gold!">
+                    </form>                
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="pl-1" for="comment">Activities:</label>
+            <div class="activities border border-secondary p-2">
+                <p class="my-0 good">testing</p>
+                <p class="my-0 bad">testing</p>
+            </div>
+        </div>
+        <form action="/reset" method="post">
+            <input class="btn btn-danger mt-5" type="submit" value="reset game">
+        </form>
+    </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
