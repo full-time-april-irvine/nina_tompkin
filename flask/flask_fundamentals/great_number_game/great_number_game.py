@@ -8,12 +8,10 @@ def homepage():
         import random
         random_num = random.randint(1,100)
         print("*"*50)
-        print("The cache has been cleared.")
+        print("The session has been cleared.")
         print(f"Our random number is {random_num}")
-        session['random_num'] = random_num
-        session['phrase']=""
-        session['color']=""
         print("*"*50)
+        session['random_num'] = random_num
     else:
         goal_num = int(session['random_num'])
         guess_num = int(session['guess'])
@@ -39,9 +37,7 @@ def homepage():
             print(session['phrase'])
             session['color']=f"red"
             print("*"*50)
-    return render_template('index.html',
-        sentence=session['phrase'],
-        bgcolor=session['color'])
+    return render_template('index.html')
 
 @app.route('/process', methods=['POST'])
 def process_form():
@@ -50,10 +46,7 @@ def process_form():
 
 @app.route('/reset', methods=['POST'])
 def reset_numbers():
-    if "guess" in session:
-        session.pop('guess')
-        session.pop('phrase')
-        session.pop('color')
+    session.clear()
     return redirect('/')
 
 if __name__=="__main__":

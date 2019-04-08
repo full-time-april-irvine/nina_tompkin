@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static',filename='css/styles.css')}}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ url_for('static',filename='js/script.js') }}"></script>
 </head>
 <body>
     <div class="container pt-4">
@@ -24,6 +23,7 @@
                     <h2 class="card-title pricing-card-title">Farm</h2>
                     <small class="text-muted">(earns 10-20 golds)</small>
                     <form class="pt-3" action="/process_money" method="post">
+                        <input type="hidden" name="building" value="farm"/>
                         <input class="btn btn-primary shadow" type="submit" value="Find Gold!">
                     </form>
                 </div>
@@ -33,6 +33,7 @@
                     <h2 class="card-title pricing-card-title">Cave</h2>
                     <small class="text-muted">(earns 5-10 golds)</small>
                     <form class="pt-3" action="/process_money" method="post">
+                        <input type="hidden" name="building" value="cave"/>
                         <input class="btn btn-primary shadow" type="submit" value="Find Gold!">
                     </form>                
                 </div>
@@ -42,6 +43,7 @@
                     <h2 class="card-title pricing-card-title">House</h2>
                     <small class="text-muted">(earns 2-5 golds)</small>
                     <form class="pt-3" action="/process_money" method="post">
+                        <input type="hidden" name="building" value="house"/>
                         <input class="btn btn-primary shadow" type="submit" value="Find Gold!">
                     </form>                
                 </div>
@@ -49,8 +51,9 @@
             <div class="card mb-4 shadow-sm">
                 <div class="card-body border border-secondary">
                     <h2 class="card-title pricing-card-title">Casino</h2>
-                    <small class="text-muted">(earns 0-50 golds)</small>
+                    <small class="text-muted">(earns/takes 0-50 golds)</small>
                     <form class="pt-3" action="/process_money" method="post">
+                        <input type="hidden" name="building" value="casino"/>
                         <input class="btn btn-primary shadow" type="submit" value="Find Gold!">
                     </form>                
                 </div>
@@ -59,8 +62,9 @@
         <div class="form-group">
             <label class="pl-1" for="comment">Activities:</label>
             <div class="activities border border-secondary p-2">
-                <p class="my-0 good">testing</p>
-                <p class="my-0 bad">testing</p>
+                {% for phrase in activities %}
+                    <p class="my-0 {{phrase[1]}}">{{phrase[0]}}</p>
+                {% endfor %}
             </div>
         </div>
         <form action="/reset" method="post">

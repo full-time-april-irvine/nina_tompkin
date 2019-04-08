@@ -14,15 +14,15 @@
             <h1 class="card-title">Welcome to the Great Number Game!</h1>
             <p class="card-text"> I am thinking of a number between 1 and 100...</p>
             <p class="card-text">Take a guess!</p>
-                {% if guess in session %}
-                    <table class="table mx-auto" style="width: 200px; height:200px; background-color:{{bgcolor}};">
+            {% if "guess" in session %}
+                <table class="table mx-auto" style="width: 200px; height:200px; background-color:{{session['color']}};">
                         <tr>
-                            <td class="align-middle">{{ sentence }}</td>
+                            <td class="align-middle text-white">{{ session['phrase'] }}</td>
                         </tr>
                     </table>
-                {% endif %}
+            {% endif %}
             <form action="/process" method="post">
-                <input class="mb-3" type="text" name="guess" placeholder="Enter your guess...">
+                <input class="mb-3" type="number" name="guess" placeholder="Enter your guess...">
                 <input class="btn btn-primary btn-block mb-5" type="submit" value="Submit">
             </form>
             <form action="/reset" method="post">
