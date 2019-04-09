@@ -14,7 +14,14 @@
         <p>Occupation: <input type="text" name="occ"></p>
         <input type="submit" value="Add Friend">
     </form>
-        <h1>All My Friends</h1>
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+        {% if messages %}                            <!-- check if there are any messages -->
+            {% for message in messages %}            <!-- loop through the messages -->
+                <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h1>All My Friends</h1>
     {% for one_friend in all_friends %}
         <p>First Name: {{one_friend["first_name"]}}</p>
         <p>Last Name: {{one_friend["last_name"]}}</p>
