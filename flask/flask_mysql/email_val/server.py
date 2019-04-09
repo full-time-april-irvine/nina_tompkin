@@ -15,13 +15,13 @@ def process_email():
         flash("Email is not valid!")
         return redirect('/')
     else:
-        flash("The email address you entered is a VALID email address! Thank you!")
         mysql = connectToMySQL("email_val")
         query = "INSERT INTO emails (email) VALUES (%(em)s);"
         data = {
             "em":request.form["email"]
         }
         new_email = mysql.query_db(query,data)
+        flash("The email address you entered ("+request.form["email"]+") is a VALID email address! Thank you!")
         return redirect('/success')
 
 @app.route('/success')
