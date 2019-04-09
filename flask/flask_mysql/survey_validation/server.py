@@ -5,7 +5,6 @@ app.secret_key="Topsecret"
 
 @app.route('/')
 def index():
-    print("Hello world!")
     return render_template('index.html')
 
 @app.route("/process_entry", methods=["POST"])
@@ -36,20 +35,17 @@ def process_entry():
         }
         new_user_id = mysql.query_db(query,data)
         session['recent_user'] = new_user_id
-        print("*"*50)
-        print(new_user_id)
-        print("*"*50)
         return redirect('/success')
 
 @app.route("/success")
 def success():
     mysql = connectToMySQL("dojo_survey")
-    query = mysql.query_db("SELECT * FROM users WHERE id = %(id)s;")
+    query = "SELECT * FROM users WHERE id = %(id)s;"
     data = {
-        "id":session['recent_user']
+        "id":int(session["recent_user"])
     }
     user = mysql.query_db(query,data)
-    return render_template('/success', new_user=user[0])
+    return render_template('success.html', new_user=user[0])
 
 if __name__ == "__main__":
     app.run(debug=True)
