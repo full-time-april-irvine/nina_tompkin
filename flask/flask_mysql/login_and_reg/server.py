@@ -77,6 +77,8 @@ def login():
 
 @app.route("/success")
 def success():
+    if "userid" not in session:
+        return redirect('/')
     mysql = connectToMySQL("login_and_reg")
     query = "SELECT * FROM users WHERE id = %(recent_id)s;"
     data = {
@@ -85,6 +87,10 @@ def success():
     recent_user = mysql.query_db(query,data)
     return render_template("success.html",our_user=recent_user)
 
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect('/')
 
 if __name__ == "__main__":
     app.run(debug=True)
