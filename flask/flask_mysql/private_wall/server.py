@@ -17,10 +17,10 @@ def index():
 def register_user():
     errors = []
     #first name must be longer than one character
-    if len(request.form["first"]) < 1:
+    if len(request.form["first"]) < 2:
         errors.append("First name cannot be left blank.")
     #last name must be longer than one character
-    if len(request.form["last"]) < 1:
+    if len(request.form["last"]) < 2:
         errors.append("Last name cannot be left blank.")
     #email must be in a valid format
     if not EMAIL_REGEX.match(request.form["email"]):
@@ -99,7 +99,7 @@ def wall():
     # Grab sender name, message content, and age of message for all messages sent to us (i.e. sent to our currently logged-in user)
     #We will use this information to generate a list of all messages we've received.
     mysql = connectToMySQL("private_wall")
-    query = "SELECT messages.id, messages.author_id, users.first_name, messages.content, messages.created_at FROM messages JOIN users ON messages.author_id = users.id WHERE recipient_id=%(current_user)s;"
+    query = "SELECT messages.id, messages.author_id, users.first_name, messages.content, messages.created_at FROM messages JOIN users ON messages.author_id = users.id WHERE recipient_id=%(current_user)s ORDER BY users.first_name;"
     data = {
         "current_user":session["user_id"]
     }
@@ -107,11 +107,13 @@ def wall():
     # Grab info about all users that are not us (i.e. that are not our currently logged-in user).
     # We will use this information to generate a list of users who we can send messages to.
     mysql = connectToMySQL("private_wall")
-    query = "SELECT id, first_name FROM users WHERE NOT id=%(current_user)s;"
+    query = "SELECT id, first_name FROM users WHERE NOT id=%(current_user)s ORDER BY first_name;"
     data = {
         "current_user":session["user_id"]
     }
     other_users = mysql.query_db(query,data)
+
+    #Grab the age of all messages and format them appropriately
     return render_template("wall.html",your_messages=all_your_messages,all_users=other_users)
 
 @app.route("/send_message", methods=["POST"])
@@ -134,7 +136,15 @@ def send_message():
 
 @app.route("/delete", methods=["POST"])
 def delete_message():
-    print(request.form);
+    #Run a query that deletes the message that you clicked on
+    mysql=connectToMySQL("private_wall")
+    query = "DELETE FROM messages WHERE id = %(message_id)s;"
+    data = {
+        #The delete button used POST to send the message id to this route
+        "message_id":request.form["delete"]
+    }
+    mysql.query_db(query,data)
+    flash("Message successfully deleted.","message_list")
     return redirect("/wall")
 
 

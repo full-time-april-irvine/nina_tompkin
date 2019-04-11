@@ -19,6 +19,13 @@
         <div class="column">
             <div class="innertable">
                 <h2><span class="counttext">{{session["received_count"]}}</span> Message(s) for You</h2>
+                {% with messages = get_flashed_messages(category_filter=["message_list"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="flash-alert">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
                 {% for one_message in your_messages %}
                 <div class="message-box">    
                     <div class="textonly">
@@ -28,7 +35,7 @@
                     <div class="img">
                         <form action ="/delete" method="POST">
                             <input type="hidden" name="delete" value="{{one_message['id']}}">
-                            <input type="image" name="submit" src ="{{ url_for('static', filename='imgs/trash.png') }}">
+                            <input class="deletebutton" type="submit" name="submit" value="">
                         </form>
                     </div>
                 </div>

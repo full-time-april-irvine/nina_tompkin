@@ -99,8 +99,16 @@
     width: 19%;
 }
 
-img{
+.deletebutton{
     width:30px;
+    background-image:url("/static/imgs/trash.png");
+    background-position:center;
+    padding:3px;
+    background-size:cover;
+}
+
+.deletebutton:hover{
+    cursor: pointer;
 }
 
 .flash-alert{
@@ -137,4 +145,8 @@ img{
     width:70px;
     margin-left:20px;
     float:right;
+}
+
+.button:hover{
+    cursor: pointer;
 }
