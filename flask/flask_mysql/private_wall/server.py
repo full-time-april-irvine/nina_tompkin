@@ -79,5 +79,25 @@ def login():
 def wall():
     return render_template("wall.html")
 
+@app.route("/send_message", methods=["POST"])
+def send_message():
+    if len(request.form["content"]) < 5:
+        flash("Message must be longer than 5 characters.","wall")  
+    return redirect("/wall")
+
+    mysql = connectToMySQL("private_wall")
+    query = "INSERT INTO messages (user_id, content, created_at, updated_at) VALUES (%(id)s,%(content)s,NOW(),NOW());"
+    data = {
+        "id":session["user_id"],
+        "content":request.form["content"]
+    }
+    mysql.query_db(query,data)
+    return redirect("/")
+
+@app.route("/logout")
+def logout():
+    session.clear();
+    return redirect("/")
+
 if __name__ == "__main__":
     app.run(debug=True)

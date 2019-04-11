@@ -52,7 +52,14 @@
             <div class="innertable">
                 <h2>Send Messages</h2>
                 <h3 class="counttext">You have sent 12 messages so far.</h3>
-                <form class="form-group" action="/action_page.php" method="POST">
+                {% with messages = get_flashed_messages(category_filter=["wall"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="flash-alert">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <form class="form-group" action="/send_message" method="POST">
                     <div class="message_name">
                         <label for="message">Donovan</label>
                     </div>
@@ -61,7 +68,7 @@
                         <input class="button" type="submit" value="Send">
                     </div>
                 </form>
-                <form class="form-group" action="/action_page.php" method="POST">
+                <form class="form-group" action="/send_message" method="POST">
                     <div class="message_name">
                         <label for="message">Nina</label>
                     </div>
@@ -70,7 +77,7 @@
                         <input class="button" type="submit" value="Send">
                     </div>
                 </form>
-                <form class="form-group" action="/action_page.php" method="POST">
+                <form class="form-group" action="/send_message" method="POST">
                     <div class="message_name">
                         <label for="message">Noelle</label>
                     </div>
@@ -79,7 +86,7 @@
                         <input class="button" type="submit" value="Send">
                     </div>
                 </form>
-                <form class="form-group" action="/action_page.php" method="POST">
+                <form class="form-group" action="/send_message" method="POST">
                     <div class="message_name">
                         <label for="message">Jennifer</label>
                     </div>
