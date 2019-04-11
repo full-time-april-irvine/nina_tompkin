@@ -11,30 +11,35 @@
     <div class="navbar">
         <h1>CodingDojo Wall</h1>
         <div class="left-message">
-            <p>Welcome, Michael!</p>
+            <p>Welcome, {{session["user_name"]}}!</p>
             <a href="/logout">Log Out</a>
         </div>
     </div>
     <div class="row">
         <div class="column">
             <div class="innertable">
-                <h2><span class="counttext">3</span> Message(s) for You</h2>
+                <h2><span class="counttext">{{session["received_count"]}}</span> Message(s) for You</h2>
+                {% for one_message in your_messages %}
                 <div class="message-box">    
                     <div class="textonly">
-                        <p>Noelle said <span class="timetext">(3 hours ago)</span>:</p>
-                        <p class="quote">"I love Python! Don't you?"</p>
+                        <p>{{one_message["first_name"]}} said <span class="timetext">(3 hours ago)</span>:</p>
+                        <p class="quote">"{{one_message["content"]}}"</p>
                     </div>
                     <div class="img">
-                        <a href="#"><img src ="{{ url_for('static', filename='imgs/trash.png') }}"></a>
+                        <form action ="/delete" method="POST">
+                            <input type="hidden" name="delete" value="{{one_message['id']}}">
+                            <input type="image" name="submit" src ="{{ url_for('static', filename='imgs/trash.png') }}">
+                        </form>
                     </div>
                 </div>
-                <div class="message-box">    
+                {% endfor %}
+                <!-- <div class="message-box">    
                     <div class="textonly">
                         <p>Graham said <span class="timetext">(1 day ago)</span>:</p>
                         <p class="quote">"This assignment is great!"</p>
                     </div>
                     <div class="img">
-                        <a href="#"><img src ="{{ url_for('static', filename='imgs/trash.png') }}"></a>
+                        <a href="/delete_message"><img src ="{{ url_for('static', filename='imgs/trash.png') }}"></a>
                     </div>
                 </div>
                 <div class="message-box">    
@@ -45,13 +50,13 @@
                     <div class="img">
                         <a href="#"><img src ="{{ url_for('static', filename='imgs/trash.png') }}"></a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>     
         <div class="column border-middle">
             <div class="innertable">
                 <h2>Send Messages</h2>
-                <h3 class="counttext">You have sent 12 messages so far.</h3>
+                <h3 class="counttext">You have sent {{session["sent_count"]}} messages so far.</h3>
                 {% with messages = get_flashed_messages(category_filter=["wall"]) %}
                     {% if messages %}
                         {% for message in messages %}
@@ -59,16 +64,19 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
+                {% for user in all_users %}
                 <form class="form-group" action="/send_message" method="POST">
                     <div class="message_name">
-                        <label for="message">Donovan</label>
+                        <label for="message">{{user['first_name']}}</label>
                     </div>
                     <div class="textsubmit">
                         <textarea rows="4" cols="50" name="content"></textarea>
+                        <input type="hidden" name="recipient_id" value="{{user['id']}}">
                         <input class="button" type="submit" value="Send">
                     </div>
                 </form>
-                <form class="form-group" action="/send_message" method="POST">
+                {% endfor %}
+                <!-- <form class="form-group" action="/send_message" method="POST">
                     <div class="message_name">
                         <label for="message">Nina</label>
                     </div>
@@ -94,7 +102,7 @@
                         <textarea rows="4" cols="50" name="content"></textarea>
                         <input class="button" type="submit" value="Send">
                     </div>
-                </form>
+                </form> -->
             </div>
     </div>
 </body>

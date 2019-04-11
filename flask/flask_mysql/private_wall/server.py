@@ -61,7 +61,7 @@ def register_user():
 @app.route("/login", methods =["POST"])
 def login():
     mysql = connectToMySQL("private_wall")
-    query = "SELECT id, pw_hash FROM users WHERE email = %(em)s;"
+    query = "SELECT id, first_name, pw_hash FROM users WHERE email = %(em)s;"
     data = {
         "em":request.form["email"]
     }
@@ -70,6 +70,7 @@ def login():
         user = matching_users[0]
         if bcrypt.check_password_hash(user['pw_hash'],request.form['password']):
             session["user_id"] = user["id"]
+            session["user_name"] = user["first_name"]
             return redirect("/wall")
     
     flash("Email or password invalid","login")
@@ -77,22 +78,65 @@ def login():
 
 @app.route("/wall")
 def wall():
-    return render_template("wall.html")
+    #Return a count of all the messages that have been sent to you
+    mysql = connectToMySQL("private_wall")
+    query = "SELECT COUNT(*) FROM messages WHERE recipient_id = %(id)s;"
+    data = {
+        "id":session["user_id"]
+    }
+    received_count = mysql.query_db(query,data)
+    session["received_count"] = received_count[0]['COUNT(*)']
+    
+    #Return a count of all messages you've sent so far
+    mysql = connectToMySQL("private_wall")
+    query = "SELECT COUNT(*) FROM messages WHERE author_id = %(id)s;"
+    data = {
+        "id":session["user_id"]
+    }
+    sent_count = mysql.query_db(query,data)
+    session["sent_count"] = sent_count[0]['COUNT(*)']
+    
+    # Grab sender name, message content, and age of message for all messages sent to us (i.e. sent to our currently logged-in user)
+    #We will use this information to generate a list of all messages we've received.
+    mysql = connectToMySQL("private_wall")
+    query = "SELECT messages.id, messages.author_id, users.first_name, messages.content, messages.created_at FROM messages JOIN users ON messages.author_id = users.id WHERE recipient_id=%(current_user)s;"
+    data = {
+        "current_user":session["user_id"]
+    }
+    all_your_messages = mysql.query_db(query,data)
+    # Grab info about all users that are not us (i.e. that are not our currently logged-in user).
+    # We will use this information to generate a list of users who we can send messages to.
+    mysql = connectToMySQL("private_wall")
+    query = "SELECT id, first_name FROM users WHERE NOT id=%(current_user)s;"
+    data = {
+        "current_user":session["user_id"]
+    }
+    other_users = mysql.query_db(query,data)
+    return render_template("wall.html",your_messages=all_your_messages,all_users=other_users)
 
 @app.route("/send_message", methods=["POST"])
 def send_message():
     if len(request.form["content"]) < 5:
         flash("Message must be longer than 5 characters.","wall")  
-    return redirect("/wall")
-
+        return redirect("/wall")
+    #Insert new message content into database
     mysql = connectToMySQL("private_wall")
-    query = "INSERT INTO messages (user_id, content, created_at, updated_at) VALUES (%(id)s,%(content)s,NOW(),NOW());"
+    query = "INSERT INTO messages (author_id, recipient_id, content, created_at, updated_at) VALUES (%(id)s,%(recipient)s,%(content)s,NOW(),NOW());"
     data = {
         "id":session["user_id"],
+        "recipient":request.form["recipient_id"],
         "content":request.form["content"]
     }
+    #the statement below returns the recipient_id, which we don't really need for anything, so we don't need a variable for it.
     mysql.query_db(query,data)
-    return redirect("/")
+    flash("Message successfully sent!","wall")
+    return redirect("/wall")
+
+@app.route("/delete", methods=["POST"])
+def delete_message():
+    print(request.form);
+    return redirect("/wall")
+
 
 @app.route("/logout")
 def logout():
