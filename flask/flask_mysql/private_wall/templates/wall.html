@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Wall One</title>
+</head>
+<body>
+    <div class="navbar">
+        <h1>CodingDojo Wall</h1>
+        <div class="left-message">
+            <p>Welcome, Michael!</p>
+            <a href="/logout">Log Out</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="innertable">
+                <h2><span class="counttext">3</span> Message(s) for You</h2>
+                <div class="message-box">    
+                    <div class="textonly">
+                        <p>Noelle said <span class="timetext">(3 hours ago)</span>:</p>
+                        <p class="quote">"I love Python! Don't you?"</p>
+                    </div>
+                    <div class="img">
+                        <a href="#"><img src ="{{ url_for('static', filename='imgs/trash.png') }}"></a>
+                    </div>
+                </div>
+                <div class="message-box">    
+                    <div class="textonly">
+                        <p>Graham said <span class="timetext">(1 day ago)</span>:</p>
+                        <p class="quote">"This assignment is great!"</p>
+                    </div>
+                    <div class="img">
+                        <a href="#"><img src ="{{ url_for('static', filename='imgs/trash.png') }}"></a>
+                    </div>
+                </div>
+                <div class="message-box">    
+                    <div class="textonly">
+                        <p>Donovan said <span class="timetext">(1 month ago)</span>:</p>
+                        <p class="quote">"What's up, Michael?"</p>
+                    </div>
+                    <div class="img">
+                        <a href="#"><img src ="{{ url_for('static', filename='imgs/trash.png') }}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>     
+        <div class="column border-middle">
+            <div class="innertable">
+                <h2>Send Messages</h2>
+                <h3 class="counttext">You have sent 12 messages so far.</h3>
+                <form class="form-group" action="/action_page.php" method="POST">
+                    <div class="message_name">
+                        <label for="message">Donovan</label>
+                    </div>
+                    <div class="textsubmit">
+                        <textarea rows="4" cols="50" name="content"></textarea>
+                        <input class="button" type="submit" value="Send">
+                    </div>
+                </form>
+                <form class="form-group" action="/action_page.php" method="POST">
+                    <div class="message_name">
+                        <label for="message">Nina</label>
+                    </div>
+                    <div class="textsubmit">
+                        <textarea rows="4" cols="50" name="content"></textarea>
+                        <input class="button" type="submit" value="Send">
+                    </div>
+                </form>
+                <form class="form-group" action="/action_page.php" method="POST">
+                    <div class="message_name">
+                        <label for="message">Noelle</label>
+                    </div>
+                    <div class="textsubmit">
+                        <textarea rows="4" cols="50" name="content"></textarea>
+                        <input class="button" type="submit" value="Send">
+                    </div>
+                </form>
+                <form class="form-group" action="/action_page.php" method="POST">
+                    <div class="message_name">
+                        <label for="message">Jennifer</label>
+                    </div>
+                    <div class="textsubmit">
+                        <textarea rows="4" cols="50" name="content"></textarea>
+                        <input class="button" type="submit" value="Send">
+                    </div>
+                </form>
+            </div>
+    </div>
+</body>
+</html>

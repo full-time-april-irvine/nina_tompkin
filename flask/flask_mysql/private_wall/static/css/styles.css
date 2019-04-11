@@ -1,0 +1,139 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif
+}
+.navbar{
+    margin:auto;
+    height:50px;
+    background-color:lightblue;
+    border-bottom:2px solid black;
+}
+
+.navbar h1{
+    display:inline-block;
+    margin-left: 15px;
+    margin-top:6px;
+}
+
+.left-message{
+    float:right;
+    margin:12px;
+    font-size:1.1em;
+}
+
+.left-message p{
+    padding-right:20px;
+    padding-left:10px;
+}
+
+.left-message p, a {
+    display:inline-block;
+}
+
+.counttext{
+    color:green;
+}
+
+.timetext{
+    color:purple;
+}
+
+.column{
+    float:left;
+    width:50%;
+    padding-top:10px;
+    padding-left:40px;
+    padding-right:20px;
+    text-align:center;
+}
+
+.border-middle{
+    border-left:2px solid black;
+}
+
+.border{
+    border:2px solid red;
+}
+
+.row{
+    padding-top:30px;
+}
+
+.row:after{
+    content:"";
+    display:table;
+    clear:both;
+}
+.innertable{
+    text-align:left;
+    width:100%;
+}
+
+.innertable h2{
+    margin-bottom:10px;
+    text-decoration:underline;
+}
+
+.message-box{
+    vertical-align:center;
+    margin-top:20px;
+}
+
+.message-box p{
+    margin-bottom:10px;
+    font-size: 1.1em;
+}
+
+.quote{
+    margin-left:20px;
+}
+
+.textonly{
+    display:inline-block;
+    width:80%;
+}
+
+.img{
+    padding-top:10px;
+    text-align:center;
+    vertical-align: top;
+    display: inline-block;
+    width: 19%;
+}
+
+img{
+    width:30px;
+}
+
+.form-group{
+    margin-top:15px;
+}
+.message_name{
+    display:inline-block;
+    vertical-align: top;
+    width:125px;
+}
+
+.textsubmit{
+    display:inline-block;
+}
+
+.form-group label, input{
+    font-size:1.1em;
+}
+.form-group label{
+    margin-right:10px;
+}
+
+.button{
+    border-radius: 10%;
+    background-color:#28a745;
+    color:white;
+    box-shadow: 10px 10px;
+    height:40px;
+    width:70px;
+    margin-left:20px;
+    float:right;
+}
