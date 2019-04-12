@@ -29,7 +29,7 @@
                 {% for one_message in your_messages %}
                 <div class="message-box">    
                     <div class="textonly">
-                        <p>{{one_message["first_name"]}} said <span class="timetext">(3 hours ago)</span>:</p>
+                        <p>{{one_message["first_name"]}} said <span class="timetext">({{one_message["created_at"] | time_formatter}})</span>:</p>
                         <p class="quote">"{{one_message["content"]}}"</p>
                     </div>
                     <div class="img">

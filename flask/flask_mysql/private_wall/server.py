@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect, session, flash
 from flask_bcrypt import Bcrypt
 from mysqlconnection import connectToMySQL
+from filters import time_formatter
 import re
 app = Flask(__name__)
 app.secret_key="Topsecret"
+app.jinja_env.filters['time_formatter'] = time_formatter
 bcrypt = Bcrypt(app)
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
