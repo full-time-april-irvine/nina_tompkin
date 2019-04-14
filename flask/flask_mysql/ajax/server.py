@@ -15,6 +15,17 @@ PASSWORD_REGEX = re.compile(r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$')
 def index():
     return render_template("index.html")
 
+@app.route('/username',methods=["POST"])
+def username():
+    found = False
+    mysql = connectToMySQL('ajaxWall')
+    query = "SELECT username FROM users WHERE users.username = %(user)s;"
+    data = { "user":request.form["username"]}
+    result = mysql.query_db(query,data)
+    if result:
+        found = True
+    return render_template('partials/username.html',found=found)
+
 @app.route('/register', methods=["POST"])
 def register_user():
     errors = []
@@ -28,7 +39,7 @@ def register_user():
     if not EMAIL_REGEX.match(request.form["email"]):
         errors.append("Email must be in a valid format")
     #email must be unique
-    mysql = connectToMySQL("private_wall")
+    mysql = connectToMySQL('ajaxWall')
     query = "SELECT * FROM users WHERE email = %(em)s;"
     data = {
         "em":request.form["email"]
@@ -48,7 +59,7 @@ def register_user():
         return redirect('/')
 
     pw_hash = bcrypt.generate_password_hash(request.form["password"])
-    mysql = connectToMySQL("private_wall")
+    mysql = connectToMySQL('ajaxWall')
     query = "INSERT INTO users (first_name, last_name, email, pw_hash) VALUES (%(fname)s,%(lname)s,%(em)s,%(pw)s);"
     data = {
         "fname":request.form["first"],
@@ -62,7 +73,7 @@ def register_user():
 
 @app.route("/login", methods =["POST"])
 def login():
-    mysql = connectToMySQL("private_wall")
+    mysql = connectToMySQL('ajaxWall')
     query = "SELECT id, first_name, pw_hash FROM users WHERE email = %(em)s;"
     data = {
         "em":request.form["email"]
@@ -81,7 +92,7 @@ def login():
 @app.route("/wall")
 def wall():
     #Return a count of all the messages that have been sent to you
-    mysql = connectToMySQL("private_wall")
+    mysql = connectToMySQL("ajaxWall")
     query = "SELECT COUNT(*) FROM messages WHERE recipient_id = %(id)s;"
     data = {
         "id":session["user_id"]
@@ -90,7 +101,7 @@ def wall():
     session["received_count"] = received_count[0]['COUNT(*)']
     
     #Return a count of all messages you've sent so far
-    mysql = connectToMySQL("private_wall")
+    mysql = connectToMySQL("ajaxWall")
     query = "SELECT COUNT(*) FROM messages WHERE author_id = %(id)s;"
     data = {
         "id":session["user_id"]
@@ -100,7 +111,7 @@ def wall():
     
     # Grab sender name, message content, and age of message for all messages sent to us (i.e. sent to our currently logged-in user)
     #We will use this information to generate a list of all messages we've received.
-    mysql = connectToMySQL("private_wall")
+    mysql = connectToMySQL("ajaxWall")
     query = "SELECT messages.id, messages.author_id, users.first_name, messages.content, messages.created_at FROM messages JOIN users ON messages.author_id = users.id WHERE recipient_id=%(current_user)s ORDER BY users.first_name;"
     data = {
         "current_user":session["user_id"]
@@ -108,7 +119,7 @@ def wall():
     all_your_messages = mysql.query_db(query,data)
     # Grab info about all users that are not us (i.e. that are not our currently logged-in user).
     # We will use this information to generate a list of users who we can send messages to.
-    mysql = connectToMySQL("private_wall")
+    mysql = connectToMySQL("ajaxWall")
     query = "SELECT id, first_name FROM users WHERE NOT id=%(current_user)s ORDER BY first_name;"
     data = {
         "current_user":session["user_id"]
@@ -124,7 +135,7 @@ def send_message():
         flash("Message must be longer than 5 characters.","wall")  
         return redirect("/wall")
     #Insert new message content into database
-    mysql = connectToMySQL("private_wall")
+    mysql = connectToMySQL("ajaxWall")
     query = "INSERT INTO messages (author_id, recipient_id, content, created_at, updated_at) VALUES (%(id)s,%(recipient)s,%(content)s,NOW(),NOW());"
     data = {
         "id":session["user_id"],
@@ -139,7 +150,7 @@ def send_message():
 @app.route("/delete", methods=["POST"])
 def delete_message():
     #Run a query that deletes the message that you clicked on
-    mysql=connectToMySQL("private_wall")
+    mysql=connectToMySQL("ajaxWall")
     query = "DELETE FROM messages WHERE id = %(message_id)s;"
     data = {
         #The delete button used POST to send the message id to this route

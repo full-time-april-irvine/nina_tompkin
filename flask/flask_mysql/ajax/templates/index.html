@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/wall.js') }}"></script>
+    <title>Login and Registration</title>
+</head>
+<body>
+    <div class="container p-4 d-flex justify-content-between">
+        <div class="mx-3">
+            <form action="/register" method="POST" id="regForm">
+                <h1 class="h3 mb-3">Registration</h1>
+                <div class="form-group row">
+                    <label for="first_name" class="col-sm-6 col-form-label">First Name</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="first_name" name="first">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="last_name" class="col-sm-6 col-form-label">Last Name</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="last_name" name="last">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="username" class="col-sm-6 col-form-label">Username</label>
+                    <div class="col-sm-6">
+                        <div id="usernameMsg"></div>
+                        <input type="text" class="form-control" id="username" name="uname">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email_entry" class="col-sm-6 col-form-label">Email</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="email_entry" name="email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password_entry" class="col-sm-6 col-form-label">Password</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control" id="password_entry" name="password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password_confirm" class="col-sm-6 col-form-label">Confirm password</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control" id="password_confirm" name="password2">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-success">Register!</button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-sm-6">
+                {% with messages = get_flashed_messages(category_filter=["register"]) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="form-text text-danger m-0" style="width:400px;">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="d-inline-block align-top mx-3" style="width:400px;">
+            <form action="/login" method="POST">
+                <h1 class="h3 mb-3">Login</h1>
+                <div class="form-group row">
+                    <label for="email_entry" class="col-sm-6 col-form-label">Email:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="email_entry" name="email" placeholder="Email Address">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password_entry" class="col-sm-6 col-form-label">Password:</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control" id="password_entry" name="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-success">Log in!</button>
+                    </div>
+                </div>
+            </form>
+            <div class="pt-4">
+            {% with messages = get_flashed_messages(category_filter=["login"]) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="form-text text-danger">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
