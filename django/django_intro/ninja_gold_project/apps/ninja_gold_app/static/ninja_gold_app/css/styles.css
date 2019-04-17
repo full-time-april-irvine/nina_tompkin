@@ -1,0 +1,82 @@
+*{
+    margin:0;
+    padding:0;
+    font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+}
+
+.container{
+    width:90%;
+    margin:auto;
+}
+
+.label, .display{
+    display: inline-block;
+    margin-top:20px;
+    padding-top:5px;
+    padding-bottom:5px;
+
+}
+.label{
+    margin-right:20px;
+}
+
+.display{
+    padding-left:5px;
+    border: 1px solid black;
+    width:120px;
+}
+
+.container a{
+    text-decoration: none;
+    margin:20px;
+    float:right;
+}
+
+.row{
+    margin-top:30px;
+}
+
+.spacer{
+    width:20px;
+    display: inline-block;
+}
+
+.col{
+    border:1px solid black;
+    padding:20px;
+    text-align: center;
+    width:200px;
+    display:inline-block;
+}
+
+.col h2, p{
+    margin-bottom:15px;
+}
+
+.button{
+    margin-top:10px;
+    margin-bottom:20px;
+    background-color:lightgreen;
+    font-size:1em;
+    width:100px;
+    height:35px;
+    border-radius: 1px;
+    box-shadow: 2px 4px;
+}
+
+.activities{
+    margin-top:20px;
+}
+
+.activities p{
+    margin-bottom:5px;
+    font-size:0.75em;
+}
+
+.green-text{
+    color:green;
+}
+
+.red-text{
+    color:red;
+}

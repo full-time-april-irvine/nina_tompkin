@@ -1,0 +1,31 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    padding:50px;
+}
+
+div {    
+    width:400px;
+    margin:auto;
+    text-align: center;
+}
+
+p {
+    border:1px solid black;
+    height:30px;
+    width:200px;
+    margin:auto;
+    padding:5px;
+    margin-bottom:20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+h1{
+    border:1px solid black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size:3em;
+}

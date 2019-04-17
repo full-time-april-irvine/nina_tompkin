@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Index</title>
+    <link rel="stylesheet" href="{% static 'first_django_app/css/style.css' %}">
+    <script src ="{% static 'first_django_app/js/script.js' %}"></script>
+    {% load static %}
+</head>
+<body>
+    <img src = "{% static 'first_django_app/imges/image.jpg' %}"/>
+    <h1>Info From Server:</h1>
+    <p>Name: {{name}}</p>
+    <p>Color: {{favorite_color}}</p>
+    <p>Pets</p>
+    <ul>
+    {% for pet in pets %}
+    <li>{{pet}}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
+

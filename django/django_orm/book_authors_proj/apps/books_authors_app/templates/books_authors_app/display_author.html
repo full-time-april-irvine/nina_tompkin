@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Testing</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'books_authors_app/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{this_author.first_name}} {{this_author.last_name}}</h1>
+        <p>{{this_author.id}}</p>
+        <div>
+            <p>Notes:</p>
+            <p>{{this_author.notes}}</p>
+        </div>
+        <p>Books:</p>
+        <ul>
+            {% for book in these_books %}
+            <li>{{book.title}}</li>
+            {% endfor %}
+        </ul>
+        <form action="/add_book_to_author" method="POST">
+            {% csrf_token %}
+            <select name="books">
+                <option disabled selected value> -- select a book -- </option>
+                {% for book in all_books %}
+                    <option value="{{book.id}}">{{book.title}}</option>
+                {% endfor %}
+            </select>
+            <input type="hidden" name="this_author" value="{{this_author.id}}">
+            <input type="submit" value="Add">
+        </form>
+
+    </div>
+</body>
+</html>

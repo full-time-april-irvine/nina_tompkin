@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Testing</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'books_authors_app/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>PHP</h1>
+        <p>ID: 4</p>
+        <div>
+            <p>Description:</p>
+            <p>This book is clearly a masterpiece omg I can't believe it. It's very epic.</p>
+        </div>
+        <p>Authors:</p>
+        <ul>
+            <li>Fyodor Dostoevsky</li>
+            <li>Bill Shakespeare</li>
+        </ul>
+        <select>
+            <option disabled selected value> -- select an author -- </option>
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+        </select>
+    </div>
+</body>
+</html>
