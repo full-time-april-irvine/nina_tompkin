@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login & Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login_and_reg_app/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="col">
+            <div class="center">
+                <h1>Registration</h1>
+            </div>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>                   
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+            </ul>
+            {% endif %}     
+            <form action="/create/" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">First Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="fname" name="first_name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="lname">Last Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="lname" name="last_name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="email" name="email">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="birthday">Birthday</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="date" id="bday" name="birthday">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" id="pword" name="password">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="password2">Confirm PW</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" id="pword2" name="password2">
+                    </div>
+                </div>
+                <div class="row center">
+                    <input class="button" type="submit" value="Register">
+                </div>
+        </div>
+        <div class="col login">
+            <div class="center">
+                <h1>Login</h1>
+            </div>
+            <form action="/action_page.php" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-25">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="email" name="email">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" id="pword" name="password">
+                    </div>
+                </div>
+                <div class="row center">
+                    <input class="button" type="submit" value="Log In">
+                </div>
+            </form>
+        </div>
+    </div>
+</html>

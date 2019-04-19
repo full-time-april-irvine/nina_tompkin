@@ -1,0 +1,136 @@
+*{
+    margin:0;
+    padding:0;
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+.container{
+    padding:40px;
+    width:60%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.shows{
+    border-collapse:collapse;
+    border: 1px solid black;
+    margin-top:30px;
+    margin-bottom:30px;
+}
+
+.shows th{
+    text-align:left;
+    background-color:grey;
+    padding:3px;
+}
+
+.shows td, .shows th {
+    border-left: 1px solid black;
+}
+
+.shows td{
+    padding: 8px;
+    font-size:0.9em;
+}
+
+.shows tr:nth-child(even){
+    background-color:#f2f2f2;
+}
+
+/* CSS For New Page and Edit Page Start Here */
+
+.go-back{
+    float:right;
+}
+
+.form-group{
+    margin-top: 20px;
+}
+
+.title{
+    width:100%;
+    height:25px;
+    border:2px solid black;
+    padding-left: 5px;
+    font-size:1em;
+    margin-bottom:20px;
+}
+
+.network-group{
+    width:48%;
+    display:inline-block;
+    vertical-align: top;
+    margin-right:10px;
+}
+
+.network-group input{
+    width: 100%;
+    height:25px;
+    padding-left: 5px;
+    border:2px solid black;
+    font-size:1em;
+}
+
+.release-group{
+    width:48%;
+    display:inline-block;
+}
+
+.release-group input{
+    height:25px;
+    padding-left: 5px;
+    border:2px solid black;
+    font-size:1em;
+}
+
+.release-group label{
+    margin-right: 100px;
+}
+
+.release-group img{
+    width:20px;
+    vertical-align: middle;
+    float:right;
+}
+
+.description{
+    margin-top: 20px;
+    margin-bottom:20px;
+}
+
+.description label{
+    text-align:left;
+}
+
+.description textarea{
+    width:100%;
+    padding-left: 5px;
+    border:2px solid black;
+    font-size:1em;
+}
+
+.center{
+    text-align: center;
+}
+
+.button{
+    text-align: center;
+    border:1px solid black;
+    width:70px;
+    height:30px;
+    font-size:0.8em;
+    box-shadow:2px 5px;
+}
+
+.text-group{
+    margin-top: 30px;
+    margin-bottom:90px;
+}
+
+.text-group p{
+    padding-top:10px;
+}
+
+.footer{
+    margin-top: 20px;
+}

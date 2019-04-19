@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tv_shows_val_app/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <a class="go-back" href="/shows/">Go Back</a>
+        <h1>Edit Show {{this_show.id}}</h1>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>                    
+                    {{ message }}
+                </li>
+                {% endfor %}
+        </ul>
+        {% endif %}
+        <form class="form-group" action="/shows/{{this_show.id}}/update/" method="POST">
+            {% csrf_token %}
+            <label for="title">Title</label>
+            <input class="title" type="text" id="title" name="show_title" placeholder="{{this_show.title}}">
+            <div class="network-group">
+                <label for="network">Network</label>
+                <input type="text" id="network" name="show_network" placeholder="{{this_show.network}}">
+            </div>
+            <div class="release-group">
+                <label for="release_date">Release Date</label>
+                <div class="img-align">
+                    <input type="date" id="date" name="show_release" value="{{this_show.release_date}}">
+                    <img src="{% static 'tv_shows_val_app/images/calendar.jpg' %}">
+                </div>
+            </div>
+            <div class="description">
+                <label for="description">Description</label>
+                <textarea name="show_desc" rows="4" cols="10">{{this_show.description}}</textarea>
+            </div>
+            <div class="center">
+                <input class="button" type="submit" value="Create">
+            </div>
+            
+        </form>
+    </div>
+</body>
+</html>

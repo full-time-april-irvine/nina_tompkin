@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Read (One)</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tv_shows_val_app/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <a class="go-back" href="/shows/">Go Back</a>
+        <h1>TV Show {{this_show.id}}</h1>
+        <div class="text-group">
+            <p>{{this_show.title}}</p>
+            <p>Network: {{this_show.network}}</p>
+            <p>Release Date: {{this_show.release_date}}</p>
+            <p>Description: {{this_show.description}}</p>
+        </div>
+
+        <p>Last Updated: {{this_show.updated_at}}</p>
+        <p class="footer"><a href="/shows/{{this_show.id}}/edit/"+>Edit</a> | <a href="/shows/{{this_show.id}}/delete/">Delete</a></p>
+    </div>
+</body>
+</html>

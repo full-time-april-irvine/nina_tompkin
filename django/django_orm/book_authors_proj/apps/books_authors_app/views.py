@@ -1,5 +1,3 @@
-"""testing docstring."""
-
 from django.shortcuts import render, redirect
 from .models import Books, Authors
 
